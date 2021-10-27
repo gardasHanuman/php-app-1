@@ -1,5 +1,8 @@
 pipeline{
     agent none
+    tools{
+        dockerTool 'mydocker'
+    }
     environment{
         IMAGE_NAME='devopstrainer/java-mvn-privaterepo:php$BUILD_NUMBER'
     }
@@ -9,8 +12,7 @@ pipeline{
             steps{
                 script{
                     echo "Building the docker image"
-                    sh 'sudo yum install docker -y'
-                   withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh "sudo docker build -t ${IMAGE_NAME} ."
                         sh 'sudo sudo docker login -u $USER -p $PASS'
                         sh "sudo docker push ${IMAGE_NAME}"
