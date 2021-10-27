@@ -1,7 +1,7 @@
 pipeline{
     agent none
     tools{
-        dockerTool 'mydocker'
+        docker 'mydocker'
     }
     environment{
         IMAGE_NAME='devopstrainer/java-mvn-privaterepo:php$BUILD_NUMBER'
