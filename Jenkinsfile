@@ -1,10 +1,11 @@
 pipeline{
-    agent any
+    agent none
     environment{
         IMAGE_NAME='devopstrainer/java-mvn-privaterepo:php$BUILD_NUMBER'
     }
     stages{
         stage("Build the docker image for php"){
+            agent any
             steps{
                 script{
                     echo "Building the docker image"
@@ -17,6 +18,7 @@ pipeline{
             }
         }
         stage("Deploy app via dockercompose file"){
+            agent label{'linux_slave'}
             steps{
                 script{
                     echo "deploy with dockercompose"
