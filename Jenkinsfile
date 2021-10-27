@@ -9,6 +9,7 @@ pipeline{
             steps{
                 script{
                     echo "Building the docker image"
+                    sh 'sudo yum install docker -y'
                    withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh "sudo docker build -t ${IMAGE_NAME} ."
                         sh 'sudo sudo docker login -u $USER -p $PASS'
