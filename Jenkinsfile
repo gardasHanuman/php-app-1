@@ -12,6 +12,7 @@ pipeline{
             steps{
                 script{
                     echo "Building the docker image"
+                    sh 'sudo systemctl start docker'
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh "sudo docker build -t ${IMAGE_NAME} ."
                         sh 'sudo sudo docker login -u $USER -p $PASS'
@@ -25,6 +26,7 @@ pipeline{
             steps{
                 script{
                     echo "deploy with dockercompose"
+                     sh 'sudo systemctl start docker'
                     sh "bash ./remote-server.sh ${IMAGE_NAME}"
                 }
             }
