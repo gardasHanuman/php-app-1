@@ -22,7 +22,7 @@ pipeline{
             }
         }
         stage("Deploy app via dockercompose file"){
-            agent label{'linux_slave'}
+            agent {label 'linux_slave'}
             steps{
                 script{
                     echo "deploy with dockercompose"
