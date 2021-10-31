@@ -5,7 +5,7 @@ pipeline{
     }
     agent none
     environment{
-        IMAGE_NAME='devopstrainer/java-mvn-privaterepo:php$BUILD_NUMBER'
+        IMAGE_NAME='23gardasvinay116/java-mvn-hanuman:php$BUILD_NUMBER'
     }
     stages{
         stage("Build the docker image for php"){
